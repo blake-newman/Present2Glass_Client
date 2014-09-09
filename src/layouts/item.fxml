@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox id="bar" maxHeight="40.0" minHeight="40.0" style="-fx-background-color: bbbbbb;" VBox.vgrow="NEVER">
+         <children>
+            <Text id="title" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets top="8.0" />
+               </HBox.margin>
+            </Text>
+            <HBox alignment="CENTER_RIGHT" fillHeight="false" maxHeight="50.0" spacing="6.0" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets left="30.0" right="10.0" />
+               </HBox.margin>
+               <children>
+                  <ImageView id="deleteIcon" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
+                     <image>
+                        <Image url="@../assets/delete.png" />
+                     </image>
+                     <effect>
+                        <InnerShadow color="#00000099" height="5.0" radius="2.0" width="5.0" />
+                     </effect>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+                  <ImageView id="addIcon" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/plus.png" />
+                     </image>
+                     <effect>
+                        <InnerShadow color="#00000080" height="5.0" radius="2.0" width="5.0" />
+                     </effect>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </HBox>
+      <ScrollPane id="content" hbarPolicy="NEVER" minHeight="0.0" prefViewportHeight="208.0" prefViewportWidth="910.0" vbarPolicy="NEVER">
+         <content>
+            <HBox id="wrapper" fillHeight="false" spacing="20.0">
+               <children>
+                  <TextArea id="input" maxWidth="560.0" minWidth="560.0" prefHeight="80.0" promptText="Notes...." wrapText="true">
+                     <effect>
+                        <DropShadow color="#00000010" />
+                     </effect>
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                  </TextArea>
+                  <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <CheckBox id="streamBox" mnemonicParsing="false" text="Stream video" VBox.vgrow="NEVER">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </CheckBox>
+                        <Separator maxWidth="250.0" prefWidth="190.0" />
+                        <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <Text id="title" strokeType="OUTSIDE" strokeWidth="0.0" text="Display time:" />
+                              <TextField id="displayTime" maxWidth="170.0" minWidth="170.0" promptText="Seconds (Default: always on)">
+                                 <cursor>
+                                    <Cursor fx:constant="TEXT" />
+                                 </cursor>
+                              </TextField>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </HBox>
+         </content>
+      </ScrollPane>
+   </children>
+   <opaqueInsets>
+      <Insets bottom="1.0" top="1.0" />
+   </opaqueInsets>
+</VBox>

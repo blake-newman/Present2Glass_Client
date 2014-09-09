@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox id="bar" alignment="CENTER" maxHeight="40.0" minHeight="40.0" style="-fx-background-color: #4e4e4e;" VBox.vgrow="NEVER">
+         <children>
+            <Text id="title" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Text>
+            <HBox id="hiddenContainer" alignment="CENTER_LEFT">
+               <children>
+                  <CheckBox id="hiddenInput" mnemonicParsing="false" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets left="25.0" />
+                     </HBox.margin>
+                     <effect>
+                        <ColorAdjust brightness="-0.79" contrast="1.0" hue="0.51" saturation="-1.0" />
+                     </effect>
+                  </CheckBox>
+                  <Text id="title" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Hidden" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" fillHeight="false" maxHeight="50.0" spacing="6.0" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets left="30.0" right="10.0" />
+               </HBox.margin>
+               <children>
+                  <ImageView id="deleteIcon" fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
+                     <image>
+                        <Image url="@../assets/delete.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+                  <ImageView id="addIcon" fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/plus.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </HBox>
+      <VBox id="notesHolder">
+         <padding>
+            <Insets left="5.0" />
+         </padding>
+      </VBox>
+   </children>
+   <opaqueInsets>
+      <Insets bottom="1.0" top="1.0" />
+   </opaqueInsets>
+</VBox>
