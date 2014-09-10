@@ -1,5 +1,6 @@
 package presenttoglass.controllers;
 
+import javafx.application.Platform;
 import presenttoglass.Main;
 import presenttoglass.components.Nav;
 
@@ -7,17 +8,23 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.*;
-import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Glass {
 
     public Boolean isConnected = false;
 
     public Glass(){
-        Nav.ip.setDisable(false);
-        System.out.println("here");
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        Nav.ip.setDisable(false);
+                    }
+                });
+            }
+        });
         checkConnection();
     }
 
@@ -39,8 +46,6 @@ public class Glass {
                     isConnected = false;
                     run();
                 }
-
-
             }
 
         }).start();
@@ -111,9 +116,12 @@ public class Glass {
                     DataOutputStream out = createOut(socket);
                     out.writeInt(4);
                     closeSocket(socket, null, out);
+                    System.exit(0);
                 } catch (IOException ignore){
                     if(dropped++ < 20){
                         run();
+                    } else {
+                        System.exit(0);
                     }
                 }
             }

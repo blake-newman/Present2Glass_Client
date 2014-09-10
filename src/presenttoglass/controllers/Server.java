@@ -1,5 +1,6 @@
 package presenttoglass.controllers;
 
+import javafx.application.Platform;
 import presenttoglass.Main;
 import presenttoglass.components.Nav;
 
@@ -9,7 +10,6 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 public class Server{
-    private int maxConnections = 50;
     public static ServerSocket serverSocket;
 
 
@@ -35,10 +35,13 @@ public class Server{
     }
 
     public void destroy(){
-        try {
-            serverSocket.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(serverSocket != null) {
+            try {
+                serverSocket.close();
+                serverSocket = null;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -63,11 +66,22 @@ public class Server{
                         if (Main.presenter.isPresenting) {
                             Main.presenter.stopPresentation();
                         }
-                        Main.glass = new Glass();
                         break;
                     case (3):
                         break;
                     case (4):
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Platform.runLater(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Nav.ip.setText("");
+                                    }
+                                });
+                            }
+                        });
+                        Main.glass = new Glass();
                         break;
                     case (6):
                         break;
@@ -76,20 +90,22 @@ public class Server{
                 }
             } catch (IOException ignore) {
             } finally {
-                if(socket != null && !socket.isClosed()){
-                    try {
-                        if(in != null){
-                            in.close();
+                if(serverSocket != null) {
+                    if (socket != null && !socket.isClosed()) {
+                        try {
+                            if (in != null) {
+                                in.close();
+                            }
+                            if (out != null) {
+                                out.close();
+                            }
+                            socket.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
-                        if(out != null){
-                            out.close();
-                        }
-                        socket.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
                     }
+                    run();
                 }
-                run();
             }
         }
 

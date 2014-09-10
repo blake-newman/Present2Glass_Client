@@ -235,7 +235,8 @@ public class Nav {
                 Platform.runLater(new Runnable() {
                     public void run() {
                         Boolean presenting = Main.presenter.isPresenting;
-                        Boolean connected =  Main.glass.isConnected;
+
+                        Boolean connected =  Main.glass != null && Main.glass.isConnected;
                         warning.setVisible(!connected);
                         sync.setVisible(!presenting && connected);
                         record.setVisible(presenting);
