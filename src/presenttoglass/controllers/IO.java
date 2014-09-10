@@ -57,8 +57,7 @@ public class IO {
                             dialogStage.close();
                             if(EventListener.listening) EventListener.stop();
                             if (quit) {
-                                Main.server.destroy();
-                                System.exit(0);
+                                Main.quit();
                             } else if (Main.presenter.isPresenting){
                                 Main.presenter.stopPresentation();
                             } else {
@@ -75,8 +74,7 @@ public class IO {
                             dialogStage.close();
                             if(EventListener.listening) EventListener.stop();
                             if (quit) {
-                                Main.server.destroy();
-                                System.exit(0);
+                                Main.quit();
                             } else if (Main.presenter.isPresenting){
                                 Main.presenter.stopPresentation();
                             } else {
@@ -91,8 +89,7 @@ public class IO {
                     dialogStage.close();
                     if(EventListener.listening) EventListener.stop();
                     if (quit) {
-                        Main.server.destroy();
-                        System.exit(0);
+                        Main.quit();
                     } else if (Main.presenter.isPresenting){
                         Main.presenter.stopPresentation();
                     } else {

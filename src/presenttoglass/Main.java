@@ -22,6 +22,9 @@ import presenttoglass.components.Viewer;
 import presenttoglass.controllers.*;
 import presenttoglass.fonts.Roboto;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class Main extends Application {
     static public Parent root;
     static public Pane pane, viewerHolder;
@@ -51,14 +54,6 @@ public class Main extends Application {
 
         setup();
         addLogoListeners();
-
-        // Start the server initially - this will be connected via localhost.
-        // When the ip address field updates it will restart the server
-        // Server will continue to attempt to connect
-        server = new Server();
-        glass = new Glass();
-
-
         openSplash();
     }
 
@@ -82,8 +77,7 @@ public class Main extends Application {
                         if (EventListener.listening) EventListener.stop();
                     }
                 } catch (NullPointerException e){
-                    Main.server.destroy();
-                    System.exit(0);
+                    quit();
                 }
             }
         });
@@ -114,8 +108,8 @@ public class Main extends Application {
     public static void openSplash(){
         if(!pane.getChildren().isEmpty()) {
             EventListener.pause();
+            server.destroy();
             glass.endConnection();
-            Nav.ip.setText("");
         }
         clear();
         IO.clear();
@@ -136,10 +130,13 @@ public class Main extends Application {
      */
     public static void openEditor(Data data){
         clear();
+        server = new Server();
+        glass = new Glass();
+        Nav.ip.setText("");
+
         editor = new Editor(data);
         Nav.show();
         animatePaneIn();
-        glass = new Glass();
     }
 
     /**
@@ -147,10 +144,14 @@ public class Main extends Application {
      */
     public static void openEditor(){
         clear();
+        server = new Server();
+        glass = new Glass();
+        Nav.ip.setText("");
+
         editor = new Editor();
         Nav.show();
         animatePaneIn();
-        glass = new Glass();
+
     }
 
     public static void toggleViewer(final Boolean show){
@@ -186,6 +187,20 @@ public class Main extends Application {
         if(!pane.getChildren().isEmpty()){
             pane.getChildren().clear();
         }
+    }
+
+    public static void quit(){
+        server.destroy();
+        glass.stopPresentation();
+        glass.endConnection();
+
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                System.exit(0);
+            }
+        }, 2000);
     }
 
 }

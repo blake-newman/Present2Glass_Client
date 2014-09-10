@@ -3,7 +3,6 @@ package presenttoglass.controllers;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import presenttoglass.Main;
 
-import java.io.IOException;
 
 public class Presenter implements presenttoglass.interfaces.Presenter {
 
@@ -375,7 +374,7 @@ public class Presenter implements presenttoglass.interfaces.Presenter {
         Main.toggleViewer(true);
         Main.glass.startPresentation();
         try {
-            Thread.sleep(3000);
+            Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
