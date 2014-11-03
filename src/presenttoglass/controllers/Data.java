@@ -17,6 +17,7 @@ public class Data {
     public ArrayList<Boolean> stream = new ArrayList<Boolean>();
     public ArrayList<Boolean> hidden = new ArrayList<Boolean>();
     public ArrayList<Long> timings = new ArrayList<Long>();
+    public ArrayList<Long> cues = new ArrayList<Long>();
     public String title;
     public String ip;
     /* Codes for presenter software
@@ -45,13 +46,13 @@ public class Data {
                 notes.add(item.getText());
                 stream.add(item.isStream());
                 timings.add(item.getDisplayTime());
+                cues.add(item.getCueTime());
             }
-
             amounts.set(i, total);
         }
     }
 
-    public Data(String title, String ip, int software, ArrayList<String> notes, ArrayList<Long> amounts, ArrayList<Boolean> hidden, ArrayList<Boolean> stream, ArrayList<Long> timings){
+    public Data(String title, String ip, int software, ArrayList<String> notes, ArrayList<Long> amounts, ArrayList<Boolean> hidden, ArrayList<Boolean> stream, ArrayList<Long> timings, ArrayList<Long> cues){
         this.totalNotes = notes.size();
         this.totalSlides = amounts.size();
         this.amounts = amounts;
@@ -60,6 +61,7 @@ public class Data {
         this.hidden = hidden;
         this.stream = stream;
         this.timings = timings;
+        this.cues = cues;
         this.ip = ip;
         this.software = software;
     }
@@ -72,10 +74,12 @@ public class Data {
         JSONArray hidden = new JSONArray();
         JSONArray timings = new JSONArray();
         JSONArray amounts = new JSONArray();
+        JSONArray cues = new JSONArray();
         notes.addAll(data.notes);
         stream.addAll(data.stream);
         timings.addAll(data.timings);
         amounts.addAll(data.amounts);
+        cues.addAll(data.cues);
         hidden.addAll(data.hidden);
         json.put("title", data.title);
         json.put("notes", notes);
@@ -83,6 +87,7 @@ public class Data {
         json.put("hidden", hidden);
         json.put("timings", timings);
         json.put("amounts", amounts);
+        json.put("cues", cues);
         json.put("ip", data.ip);
         json.put("software", data.software);
 
@@ -110,7 +115,8 @@ public class Data {
         ArrayList<Boolean> hidden = (ArrayList<Boolean>) jsonObject.get("hidden");
         ArrayList<Long> timings = (ArrayList<Long>) jsonObject.get("timings");
         ArrayList<Long> amounts = (ArrayList<Long>) jsonObject.get("amounts");
-        return new Data(title, ip, software, notes, amounts, hidden, stream, timings);
+        ArrayList<Long> cues = (ArrayList<Long>) jsonObject.get("cues");
+        return new Data(title, ip, software, notes, amounts, hidden, stream, timings, cues);
 
     }
 

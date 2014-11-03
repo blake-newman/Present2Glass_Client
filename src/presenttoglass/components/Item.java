@@ -27,14 +27,14 @@ public class Item {
     public Text title;
     public ImageView delete, add;
     public CheckBox streamCheckBox;
-    public TextField displayTimeInput;
-    public HBox displayTimeHBox, bar;
+    public TextField displayTimeInput, cueTimeInput;
+    public HBox displayTimeHBox, cueTimeHBox, bar;
     private Boolean _open = false;
 
     private int _position;
     public int slide;
 
-    public Item(int slide, int position, String text, Boolean stream, long time){
+    public Item(int slide, int position, String text, Boolean stream, long time, long cue){
         this.slide = slide;
         try {
             layout = FXMLLoader.load(getClass().getResource("/layouts/item.fxml"));
@@ -50,14 +50,28 @@ public class Item {
         streamCheckBox = (CheckBox) options.getChildren().get(0);
         displayTimeHBox = (HBox) options.getChildren().get(2);
         displayTimeInput = (TextField) displayTimeHBox.getChildren().get(1);
+        cueTimeHBox = (HBox) options.getChildren().get(3);
+        cueTimeInput = (TextField) cueTimeHBox.getChildren().get(1);
 
         displayTimeInput.lengthProperty().addListener(new ChangeListener<Number>(){
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 if(newValue.intValue() > oldValue.intValue()){
                     char ch = displayTimeInput.getText().charAt(oldValue.intValue());
-                    if(!(ch >= '0' && ch <= '9' )){
+                    if(!(ch >= '0' && ch <= '9' ) || ch != '.'){
                         displayTimeInput.setText(displayTimeInput.getText().substring(0,displayTimeInput.getText().length()-1));
+                    }
+                }
+            }
+        });
+
+        cueTimeInput.lengthProperty().addListener(new ChangeListener<Number>(){
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                if(newValue.intValue() > oldValue.intValue()){
+                    char ch = cueTimeInput.getText().charAt(oldValue.intValue());
+                    if(!(ch >= '0' && ch <= '9' ) || ch != '.'){
+                        cueTimeInput.setText(cueTimeInput.getText().substring(0,cueTimeInput.getText().length()-1));
                     }
                 }
             }
@@ -71,6 +85,7 @@ public class Item {
         title.setFont(robotoThin.font);
         setStream(stream);
         setDisplayTime(time);
+        setCueTime(time);
         setPosition(position);
         setText(text);
         addListeners();
@@ -98,8 +113,24 @@ public class Item {
     }
 
     public void setDisplayTime(Long time){
-        if(time == 0) return;
+        if(time == Long.parseLong("0")) return;
         displayTimeInput.setText(String.valueOf(time/1000));
+    }
+
+    public Long getCueTime(){
+        Long result;
+        try{
+            String data = cueTimeInput.getText();
+            result =  Long.parseLong(data)*1000;
+        } catch (NumberFormatException e) {
+            return Long.parseLong("-1");
+        }
+        return result;
+    }
+
+    public void setCueTime(Long time){
+        if(time == Long.parseLong("-1")) return;
+        cueTimeInput.setText(String.valueOf(time/1000));
     }
 
     private void barListeners(){
@@ -223,7 +254,7 @@ public class Item {
     public void open(){
         _open = true;
         Timeline timeline = new Timeline();
-        final KeyValue kvMinHeight = new KeyValue(contents.minHeightProperty(), 120);
+        final KeyValue kvMinHeight = new KeyValue(contents.minHeightProperty(), 150);
         final KeyFrame kfMinHeight = new KeyFrame(Duration.millis(350), kvMinHeight);
         timeline.getKeyFrames().add(kfMinHeight);
         timeline.play();
