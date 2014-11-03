@@ -31,6 +31,7 @@ public class Editor {
                 notes.add(data.notes.get(j+current));
                 stream.add(data.stream.get(j+current));
                 timings.add(data.timings.get(j+current));
+                cues.add(data.cues.get(j+current));
             }
             current += data.amounts.get(i);
             addSlide(data.hidden.get(i), notes, stream, timings, cues);
