@@ -3,7 +3,6 @@ package presenttoglass.controllers;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import presenttoglass.Main;
 
-
 public class Presenter implements presenttoglass.interfaces.Presenter {
 
 
@@ -12,7 +11,6 @@ public class Presenter implements presenttoglass.interfaces.Presenter {
     public int slide = 0;
     private Data data;
     private Boolean inHiddenSlide = false;
-
     protected String goToValue = "";
 
     @Override
@@ -380,5 +378,4 @@ public class Presenter implements presenttoglass.interfaces.Presenter {
         }
         setPosition(position);
     }
-
 }

@@ -59,13 +59,13 @@
          <content>
             <HBox id="wrapper" fillHeight="false" spacing="20.0">
                <children>
-                  <TextArea id="input" maxWidth="560.0" minWidth="560.0" prefHeight="80.0" promptText="Notes...." wrapText="true">
-                     <effect>
-                        <DropShadow color="#00000010" />
-                     </effect>
+                  <TextArea id="input" maxWidth="560.0" minWidth="560.0" prefHeight="110.0" promptText="Notes...." wrapText="true">
                      <cursor>
                         <Cursor fx:constant="TEXT" />
                      </cursor>
+                     <effect>
+                        <DropShadow color="#00000010" />
+                     </effect>
                   </TextArea>
                   <VBox spacing="10.0" HBox.hgrow="ALWAYS">
                      <children>
@@ -85,6 +85,19 @@
                                  <cursor>
                                     <Cursor fx:constant="TEXT" />
                                  </cursor>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <Text id="titleCue" strokeType="OUTSIDE" strokeWidth="0.0" text="Cue time:     " />
+                              <TextField id="cueTime" maxWidth="-Infinity" prefWidth="170.0" promptText="Seconds (Default: always on)">
+                                 <cursor>
+                                    <Cursor fx:constant="TEXT" />
+                                 </cursor>
+                                 <HBox.margin>
+                                    <Insets left="1.0" />
+                                 </HBox.margin>
                               </TextField>
                            </children>
                         </HBox>

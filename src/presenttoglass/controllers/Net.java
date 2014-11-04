@@ -7,14 +7,6 @@ import java.util.regex.Pattern;
 
 public class Net {
 
-    public static String getIPAddress(boolean useIPv4) {
-        try {
-            return useIPv4 ? Inet4Address.getLocalHost().getHostAddress() : Inet6Address.getLocalHost().getHostAddress();
-        } catch (UnknownHostException e) {
-            return "";
-        }
-    }
-
     /**
      * Validate the IP address
      * @param ip String representing the ip address
