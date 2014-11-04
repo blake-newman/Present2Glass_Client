@@ -35,6 +35,11 @@ public interface Presenter {
 
     void simulateNext();
     void simulatePrevious();
+
+    void simulateNextSlide();
+
+    void simulatePreviousSlide();
+
     void simulateStop();
     void simulateStart();
     void simulateReset();

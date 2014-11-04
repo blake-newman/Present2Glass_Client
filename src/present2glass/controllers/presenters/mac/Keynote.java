@@ -4,6 +4,8 @@ package present2glass.controllers.presenters.mac;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import present2glass.controllers.Presenter;
 
+import java.awt.event.KeyEvent;
+
 public class Keynote extends Presenter{
 
     @Override
@@ -62,27 +64,28 @@ public class Keynote extends Presenter{
     }
 
     @Override
-    public void simulateNext() {
-
+    public void simulateNextSlide() {
+        robot.keyPress(KeyEvent.VK_CLOSE_BRACKET);
+        robot.keyRelease(KeyEvent.VK_CLOSE_BRACKET);
     }
 
     @Override
-    public void simulatePrevious() {
-
+    public void simulatePreviousSlide() {
+        robot.keyPress(KeyEvent.VK_OPEN_BRACKET);
+        robot.keyRelease(KeyEvent.VK_OPEN_BRACKET);
     }
 
     @Override
-    public void simulateStop() {
+    public void simulateStart(){
+        robot.keyPress(KeyEvent.VK_CONTROL);
+        robot.delay(50);
+        robot.keyPress(KeyEvent.VK_ALT);
+        robot.delay(50);
+        robot.keyPress(KeyEvent.VK_P);
 
+        robot.keyRelease(KeyEvent.VK_P);
+        robot.keyRelease(KeyEvent.VK_ALT);
+        robot.keyRelease(KeyEvent.VK_CONTROL);
     }
 
-    @Override
-    public void simulateStart() {
-
-    }
-
-    @Override
-    public void simulateReset() {
-
-    }
 }

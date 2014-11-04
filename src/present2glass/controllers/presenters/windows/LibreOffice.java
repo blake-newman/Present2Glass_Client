@@ -3,6 +3,8 @@ package present2glass.controllers.presenters.windows;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import present2glass.controllers.Presenter;
 
+import java.awt.event.KeyEvent;
+
 public class LibreOffice extends Presenter{
 
     @Override
@@ -71,27 +73,31 @@ public class LibreOffice extends Presenter{
     }
 
     @Override
-    public void simulateNext() {
-
-    }
-
-    @Override
-    public void simulatePrevious() {
-
-    }
-
-    @Override
-    public void simulateStop() {
-
-    }
-
-    @Override
-    public void simulateStart() {
-
-    }
-
-    @Override
     public void simulateReset() {
 
+    }
+
+    @Override
+    public void simulateNextSlide() {
+        robot.keyPress(KeyEvent.VK_CONTROL);
+        robot.delay(50);
+        robot.keyPress(KeyEvent.VK_PAGE_DOWN);
+        robot.keyRelease(KeyEvent.VK_CONTROL);
+        robot.keyRelease(KeyEvent.VK_PAGE_DOWN);
+    }
+
+    @Override
+    public void simulatePreviousSlide() {
+        robot.keyPress(KeyEvent.VK_CONTROL);
+        robot.delay(50);
+        robot.keyPress(KeyEvent.VK_PAGE_UP);
+        robot.keyRelease(KeyEvent.VK_CONTROL);
+        robot.keyRelease(KeyEvent.VK_PAGE_UP);
+    }
+
+    @Override
+    public void simulateStart(){
+        robot.keyPress(KeyEvent.VK_F5);
+        robot.keyRelease(KeyEvent.VK_F5);
     }
 }

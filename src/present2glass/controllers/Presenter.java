@@ -3,6 +3,9 @@ package present2glass.controllers;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import present2glass.Main;
 
+import java.awt.*;
+import java.awt.event.KeyEvent;
+
 public class Presenter implements present2glass.interfaces.Presenter {
 
 
@@ -12,6 +15,15 @@ public class Presenter implements present2glass.interfaces.Presenter {
     private Data data;
     private Boolean inHiddenSlide = false;
     protected String goToValue = "";
+    protected Robot robot;
+
+    public Presenter(){
+        try {
+            robot = new Robot();
+        } catch (AWTException e){
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public Boolean isNext(int code) {
@@ -165,17 +177,32 @@ public class Presenter implements present2glass.interfaces.Presenter {
 
     @Override
     public void simulateNext() {
-
+        robot.keyPress(KeyEvent.VK_RIGHT);
+        robot.keyRelease(KeyEvent.VK_RIGHT);
+        goNext();
     }
 
     @Override
     public void simulatePrevious() {
+        robot.keyPress(KeyEvent.VK_LEFT);
+        robot.keyRelease(KeyEvent.VK_LEFT);
+        goPrevious();
+    }
 
+    @Override
+    public void simulateNextSlide() {
+        simulateNext();
+    }
+
+    @Override
+    public void simulatePreviousSlide() {
+        simulatePrevious();
     }
 
     @Override
     public void simulateStop() {
-
+        robot.keyPress(KeyEvent.VK_ESCAPE);
+        robot.keyRelease(KeyEvent.VK_ESCAPE);
     }
 
     @Override

@@ -4,6 +4,8 @@ package present2glass.controllers.presenters.windows;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import present2glass.controllers.Presenter;
 
+import java.awt.event.KeyEvent;
+
 public class Prezi extends Presenter{
 
     @Override
@@ -27,27 +29,12 @@ public class Prezi extends Presenter{
     }
 
     @Override
-    public void simulateNext() {
+    public void simulateStart(){
+        robot.keyPress(KeyEvent.VK_SHIFT);
+        robot.delay(50);
+        robot.keyPress(KeyEvent.VK_S);
 
-    }
-
-    @Override
-    public void simulatePrevious() {
-
-    }
-
-    @Override
-    public void simulateStop() {
-
-    }
-
-    @Override
-    public void simulateStart() {
-
-    }
-
-    @Override
-    public void simulateReset() {
-
+        robot.keyRelease(KeyEvent.VK_S);
+        robot.keyRelease(KeyEvent.VK_SHIFT);
     }
 }

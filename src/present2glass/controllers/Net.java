@@ -20,30 +20,5 @@ public class Net {
         return matcher.matches();
     }
 
-    public static void open(URI uri) {
-        Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
-        if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
-            try {
-                desktop.browse(uri);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
-    public static void open(URL url) {
-        try {
-            open(url.toURI());
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void open(String url){
-        try {
-            open(new URL(url));
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-    }
 }

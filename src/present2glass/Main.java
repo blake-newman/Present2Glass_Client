@@ -54,7 +54,6 @@ public class Main extends Application {
         main.show();
 
         setup();
-        addLogoListeners();
         openSplash();
     }
 
@@ -87,20 +86,6 @@ public class Main extends Application {
         viewer = new Viewer();
         viewerHolder.getChildren().add(viewer.layout);
 
-    }
-
-    /**
-     * Adds functionality to the logo at the top of the page.
-     */
-    private void addLogoListeners(){
-        ImageView ignitionLogo = (ImageView) root.lookup("#ignitionLogoView");
-        ignitionLogo.addEventHandler(MouseEvent.MOUSE_RELEASED,
-                new EventHandler<MouseEvent>() {
-                    @Override public void handle(MouseEvent e) {
-                        Net.open("http://www.ignitiononline.com");
-                    }
-                }
-        );
     }
 
     /**

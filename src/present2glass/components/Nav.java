@@ -239,8 +239,8 @@ public class Nav {
                         Boolean connected =  Main.glass != null && Main.glass.isConnected;
                         warning.setVisible(!connected);
                         sync.setVisible(!presenting && connected);
-                        record.setVisible(presenting);
-                        Nav.ip.setDisable(connected);
+                        record.setVisible(presenting && connected);
+                        Nav.ip.setDisable(connected || presenting);
                     }
                 });
             }

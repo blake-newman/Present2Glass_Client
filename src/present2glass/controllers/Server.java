@@ -60,16 +60,14 @@ public class Server{
                 int code = in.readInt();
                 switch(code) {
                     case (1):
-                        Main.presenter.startPresentation();
+                        Main.presenter.simulateStart();
                         break;
                     case (2):
                         if (Main.presenter.isPresenting) {
-                            Main.presenter.stopPresentation();
+                            Main.presenter.simulateStop();
                         }
                         break;
                     case (3):
-                        break;
-                    case (4):
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
@@ -83,9 +81,17 @@ public class Server{
                         });
                         Main.glass = new Glass();
                         break;
+                    case (4):
+                        Main.presenter.simulateNext();
+                        break;
+                    case (5):
+                        Main.presenter.simulateNextSlide();
+                        break;
                     case (6):
+                        Main.presenter.simulatePrevious();
                         break;
                     case (7):
+                        Main.presenter.simulatePreviousSlide();
                         break;
                 }
             } catch (IOException ignore) {

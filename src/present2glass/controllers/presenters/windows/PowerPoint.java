@@ -5,6 +5,8 @@ import org.jnativehook.keyboard.NativeKeyEvent;
 import present2glass.controllers.EventListener;
 import present2glass.controllers.Presenter;
 
+import java.awt.event.KeyEvent;
+
 public class PowerPoint extends Presenter{
 
     @Override
@@ -58,27 +60,9 @@ public class PowerPoint extends Presenter{
     }
 
     @Override
-    public void simulateNext() {
-
+    public void simulateStart(){
+        robot.keyPress(KeyEvent.VK_F5);
+        robot.keyRelease(KeyEvent.VK_F5);
     }
 
-    @Override
-    public void simulatePrevious() {
-
-    }
-
-    @Override
-    public void simulateStop() {
-
-    }
-
-    @Override
-    public void simulateStart() {
-
-    }
-
-    @Override
-    public void simulateReset() {
-
-    }
 }
