@@ -197,13 +197,18 @@ public class Main extends Application {
             glass.endConnection();
         }
 
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                System.exit(0);
-            }
-        }, 1500);
+        if (server != null && glass != null){
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    System.exit(0);
+                }
+            }, 1500);
+        } else {
+            System.exit(0);
+        }
+
     }
 
 }
