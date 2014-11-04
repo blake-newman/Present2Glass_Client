@@ -191,9 +191,11 @@ public class Main extends Application {
     }
 
     public static void quit(){
-        server.destroy();
+        if (server != null) server.destroy();
+        if (glass != null){
         glass.stopPresentation();
         glass.endConnection();
+        }
 
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
