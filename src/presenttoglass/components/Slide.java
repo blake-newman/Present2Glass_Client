@@ -37,7 +37,7 @@ public class Slide {
     public Timer timer;
 
 
-    public Slide(int position, Boolean hidden, ArrayList<String> notes, ArrayList<Boolean> stream, ArrayList<Long> timings, ArrayList<Long> cues) {
+    public Slide(int position, Boolean hidden, ArrayList<String> notes, ArrayList<Boolean> stream, ArrayList<Long> timings) {
         try {
             layout = FXMLLoader.load(getClass().getResource("/layouts/slide.fxml"));
         } catch (IOException e) {
@@ -61,7 +61,7 @@ public class Slide {
 
         timer = new Timer();
         for (int i = 0; i < notes.size(); i++) {
-            addItem(notes.get(i), stream.get(i), timings.get(i), cues.get(i));
+            addItem(notes.get(i), stream.get(i), timings.get(i));
         }
         sortItems();
         collapseAll();
@@ -161,14 +161,14 @@ public class Slide {
         return _position;
     }
 
-    public void addItem(String text, Boolean stream, long time, long cue) {
-        Item item = new Item(getPosition(), items.size(), text, stream, time, cue);
+    public void addItem(String text, Boolean stream, long time) {
+        Item item = new Item(getPosition(), items.size(), text, stream, time);
         addNewItem(item, items.size());
     }
 
     public void addItem(int pos) {
         pos = pos < items.size() ? pos : items.size();
-        Item item = new Item(getPosition(), pos, "", false, 0, -1);
+        Item item = new Item(getPosition(), pos, "", false, 0);
         addNewItem(item, pos);
     }
 

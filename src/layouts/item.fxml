@@ -91,7 +91,7 @@
                         <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="10.0">
                            <children>
                               <Text id="titleCue" strokeType="OUTSIDE" strokeWidth="0.0" text="Cue time:     " />
-                              <TextField id="cueTime" maxWidth="170.0" prefWidth="170.0" promptText="Seconds (Default: always on)">
+                              <TextField id="cueTime" maxWidth="-Infinity" prefWidth="170.0" promptText="Seconds (Default: always on)">
                                  <cursor>
                                     <Cursor fx:constant="TEXT" />
                                  </cursor>

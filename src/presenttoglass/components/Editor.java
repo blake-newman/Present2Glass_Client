@@ -26,15 +26,13 @@ public class Editor {
             ArrayList<String> notes = new ArrayList<String>();
             ArrayList<Boolean> stream = new ArrayList<Boolean>();
             ArrayList<Long> timings = new ArrayList<Long>();
-            ArrayList<Long> cues = new ArrayList<Long>();
             for(int j = 0; j < data.amounts.get(i); j++){
                 notes.add(data.notes.get(j+current));
                 stream.add(data.stream.get(j+current));
                 timings.add(data.timings.get(j+current));
-                cues.add(data.cues.get(j+current));
             }
             current += data.amounts.get(i);
-            addSlide(data.hidden.get(i), notes, stream, timings, cues);
+            addSlide(data.hidden.get(i), notes, stream, timings);
         }
         sortSlides();
     }
@@ -99,8 +97,8 @@ public class Editor {
         slides.get(slide).addItem(pos);
     }
 
-    public void addSlide(Boolean hidden, ArrayList<String> notes, ArrayList<Boolean> streams, ArrayList<Long> timings, ArrayList<Long> cues){
-        Slide slide = new Slide(slides.size(), hidden, notes, streams, timings, cues);
+    public void addSlide(Boolean hidden, ArrayList<String> notes, ArrayList<Boolean> streams, ArrayList<Long> timings){
+        Slide slide = new Slide(slides.size(), hidden, notes, streams, timings);
         addNewSlide(slide, slides.size());
     }
 
