@@ -107,14 +107,12 @@ public class Editor {
         ArrayList<String> notes = new ArrayList<String>();
         ArrayList<Boolean> streams = new ArrayList<Boolean>();
         ArrayList<Long> timings = new ArrayList<Long>();
-        ArrayList<Long> cues = new ArrayList<Long>();
 
         notes.add("");
         streams.add(false);
         timings.add(Long.parseLong("0"));
-        cues.add(Long.parseLong("-1"));
 
-        Slide slide = new Slide(pos, false, notes, streams, timings, cues);
+        Slide slide = new Slide(pos, false, notes, streams, timings);
         addNewSlide(slide, pos);
     }
 
