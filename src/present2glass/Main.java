@@ -193,8 +193,8 @@ public class Main extends Application {
     public static void quit(){
         if (server != null) server.destroy();
         if (glass != null){
-        glass.stopPresentation();
-        glass.endConnection();
+            glass.stopPresentation();
+            glass.endConnection();
         }
 
         Timer timer = new Timer();
@@ -203,7 +203,7 @@ public class Main extends Application {
             public void run() {
                 System.exit(0);
             }
-        }, 2000);
+        }, 1500);
     }
 
 }
