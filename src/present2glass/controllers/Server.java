@@ -1,17 +1,22 @@
 package present2glass.controllers;
 
-import javafx.application.Platform;
 import present2glass.Main;
-import present2glass.components.Nav;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Server{
     public static ServerSocket serverSocket;
-
+    public Boolean connected = false;
+    public int timeout = 0;
+    private Timer connectionTimer = new Timer();
+    public String outNote = null;
+    public Long outTime = Long.parseLong("-1");
+    private Boolean outStart = false;
+    private Boolean outStop = false;
 
     public Server(){
         if(serverSocket != null) return;
@@ -23,6 +28,16 @@ public class Server{
             while(num++ < 50){
                 addConnection();
             }
+
+            connectionTimer.scheduleAtFixedRate(new TimerTask() {
+                @Override
+                public void run() {
+                    timeout++;
+                    if (timeout == 2) {
+                        connected = false;
+                    }
+                }
+            }, 0, 500);
         } catch (IOException e) {
             System.out.println("ERROR - NOT ABLE TO START SERVER ANOTHER CLIENT IS OPEN");
             System.exit(0);
@@ -32,6 +47,15 @@ public class Server{
     private void addConnection(){
         Connection thread = new Connection();
         thread.start();
+    }
+
+
+    public void startPresentation() {
+        outStart = true;
+    }
+
+    public void stopPresentation() {
+        outStop = false;
     }
 
     public void destroy(){
@@ -55,10 +79,28 @@ public class Server{
             try {
                 socket = serverSocket.accept();
                 socket.setReuseAddress(true);
-                in = new DataInputStream(socket.getInputStream());
-                out = new DataOutputStream(socket.getOutputStream());
+                connected = true;
+                timeout = 0;
                 int code = in.readInt();
                 switch(code) {
+                    case (0):
+                        if (outStart) {
+                            out.writeInt(1);
+                            outStart = false;
+                        } else if (outStop) {
+                            out.writeInt(2);
+                            outStop = false;
+                            outNote = null;
+                            outTime = Long.parseLong("-1");
+                        } else if (outNote != null && outTime != Long.parseLong("-1")){
+                            out.writeInt(3);
+                            out.writeUTF(outNote);
+                            out.writeLong(outTime);
+                            outNote = null;
+                            outTime = Long.parseLong("-1");
+                        }  else {
+                            out.writeInt(999);
+                        }
                     case (1):
                         Main.presenter.simulateStart();
                         break;
@@ -68,29 +110,15 @@ public class Server{
                         }
                         break;
                     case (3):
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Platform.runLater(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Nav.ip.setText("");
-                                    }
-                                });
-                            }
-                        });
-                        Main.glass = new Glass();
-                        break;
-                    case (4):
                         Main.presenter.simulateNext();
                         break;
-                    case (5):
+                    case (4):
                         Main.presenter.simulateNextSlide();
                         break;
-                    case (6):
+                    case (5):
                         Main.presenter.simulatePrevious();
                         break;
-                    case (7):
+                    case (6):
                         Main.presenter.simulatePreviousSlide();
                         break;
                 }
@@ -114,6 +142,5 @@ public class Server{
                 }
             }
         }
-
     }
 }

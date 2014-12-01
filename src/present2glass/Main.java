@@ -94,8 +94,8 @@ public class Main extends Application {
     public static void openSplash(){
         if(!pane.getChildren().isEmpty()) {
             EventListener.pause();
+            server.stopPresentation();
             server.destroy();
-            glass.endConnection();
         }
         clear();
         IO.clear();
@@ -176,11 +176,11 @@ public class Main extends Application {
     }
 
     public static void quit(){
-        if (server != null) server.destroy();
-        if (glass != null){
-            glass.stopPresentation();
-            glass.endConnection();
+        if (server != null){
+            server.stopPresentation();
+            server.destroy();
         }
+
 
         if (server != null && glass != null){
             Timer timer = new Timer();

@@ -26,7 +26,6 @@ public class Item {
     public TextArea input;
     public Text title;
     public ImageView delete, add;
-    public CheckBox streamCheckBox;
     public TextField displayTimeInput;
     public HBox displayTimeHBox, bar;
     private Boolean _open = false;
@@ -34,7 +33,7 @@ public class Item {
     private int _position;
     public int slide;
 
-    public Item(int slide, int position, String text, Boolean stream, long time){
+    public Item(int slide, int position, String text, long time){
         this.slide = slide;
         try {
             layout = FXMLLoader.load(getClass().getResource("/layouts/item.fxml"));
@@ -47,7 +46,6 @@ public class Item {
         input = (TextArea) wrapper.getChildren().get(0);
         VBox options = (VBox) wrapper.getChildren().get(1);
 
-        streamCheckBox = (CheckBox) options.getChildren().get(0);
         displayTimeHBox = (HBox) options.getChildren().get(2);
         displayTimeInput = (TextField) displayTimeHBox.getChildren().get(1);
 
@@ -69,21 +67,12 @@ public class Item {
 
         Roboto robotoThin = new Roboto(Roboto.THIN, 19);
         title.setFont(robotoThin.font);
-        setStream(stream);
         setDisplayTime(time);
         setPosition(position);
         setText(text);
         addListeners();
         barListeners();
         deleteListeners();
-    }
-
-    public Boolean isStream(){
-        return streamCheckBox.isSelected();
-    }
-
-    public void setStream(Boolean stream){
-        streamCheckBox.setSelected(stream);
     }
 
     public Long getDisplayTime(){

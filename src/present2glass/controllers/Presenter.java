@@ -376,28 +376,28 @@ public class Presenter implements present2glass.interfaces.Presenter {
         slide = getSlideFromNote(position);
         inHiddenSlide = checkHiddenState(slide);
         String note = end ? "End of presentation" : data.notes.get(position);
-        Boolean stream = end ? false : data.stream.get(position);
         Long time = end ? Long.parseLong("0") : data.timings.get(position);
-        sendData(note, stream, time);
+        sendData(note, time);
     }
 
-    public void sendData(String note, Boolean stream, Long time){
+    public void sendData(String note, Long time){
         if(!isPresenting) return;
-        Main.viewer.set(note, stream, time);
-        Main.glass.sendData(note, stream, time);
+        Main.viewer.set(note, time);
+        Main.server.outNote = note;
+        Main.server.outTime = time;
     }
 
     public void stopPresentation(){
         Main.toggleViewer(false);
         isPresenting = false;
-        Main.glass.stopPresentation();
+        Main.server.stopPresentation();
     }
 
     public void startPresentation(){
         isPresenting = true;
         data = new Data();
         Main.toggleViewer(true);
-        Main.glass.startPresentation();
+        Main.server.startPresentation();
         try {
             Thread.sleep(500);
         } catch (InterruptedException e) {

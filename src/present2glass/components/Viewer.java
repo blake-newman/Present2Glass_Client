@@ -25,38 +25,19 @@ public class Viewer {
         timer = (Text) layout.lookup("#timerHolder");
     }
 
-    public void set(final String note, final Boolean stream, final Long time){
+    public void set(final String note, final Long time){
         Platform.runLater(new Runnable() {
             public void run(){
                 setContent(note);
                 timer.setText("");
-                setTime(stream, time);
+                setTime(time);
             }
         });
     }
 
-    public void setTime(Boolean stream, final Long time){
+    public void setTime(final Long time){
         final Timer myTimer = new Timer();
-        if(stream){
-            myTimer.scheduleAtFixedRate(new TimerTask() {
-                int total = 0;
-                public void run() {
-                    Platform.runLater(new Runnable() {
-                        public void run() {
-                            long remaining = (time/1000)-total;
-                            timer.setText("Streaming from glass in "+remaining+" seconds");
-                            total = total+1;
-
-                            if (remaining == 0){
-                                timer.setText("");
-                                setContent("Streaming from Glass...");
-                                myTimer.cancel();
-                            }
-                        }
-                    });
-                }
-            }, 0, 1000);
-        } else if (time != 0) {
+        if (time != 0) {
             myTimer.schedule(new TimerTask() {
                 public void run() {
                     Platform.runLater(new Runnable() {

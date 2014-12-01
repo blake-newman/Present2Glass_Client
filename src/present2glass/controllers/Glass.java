@@ -42,6 +42,7 @@ public class Glass {
                     Socket socket = createSocket();
                     closeSocket(socket, null, null);
                     isConnected = true;
+                    Nav.ip.setDisable(true);
                 } catch (IOException e){
                     isConnected = false;
                     run();
@@ -60,10 +61,6 @@ public class Glass {
         socket.setPerformancePreferences(1, 0, 0);
         socket.connect(new InetSocketAddress(ip, 7628), 500);
         return socket;
-    }
-
-    private DataInputStream createIn(Socket socket) throws IOException {
-        return new DataInputStream(socket.getInputStream());
     }
 
     private DataOutputStream createOut(Socket socket) throws IOException {
@@ -85,7 +82,7 @@ public class Glass {
         }
     }
 
-    public void stopPresentation(){
+    /*public void stopPresentation(){
         if(!isConnected) return;
         new Thread(new Runnable() {
             int dropped = 0;
@@ -172,14 +169,5 @@ public class Glass {
                 }
             }
         }).start();
-    }
-
-
-
-
-
-
-
-
-
+    }*/
 }

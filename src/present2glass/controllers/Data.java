@@ -43,7 +43,6 @@ public class Data {
             for(int j = 0; j < slide.items.size(); j++, total++) {
                 Item item = slide.items.get(j);
                 notes.add(item.getText());
-                stream.add(item.isStream());
                 timings.add(item.getDisplayTime());
             }
 
@@ -51,14 +50,13 @@ public class Data {
         }
     }
 
-    public Data(String title, String ip, int software, ArrayList<String> notes, ArrayList<Long> amounts, ArrayList<Boolean> hidden, ArrayList<Boolean> stream, ArrayList<Long> timings){
+    public Data(String title, String ip, int software, ArrayList<String> notes, ArrayList<Long> amounts, ArrayList<Boolean> hidden, ArrayList<Long> timings){
         this.totalNotes = notes.size();
         this.totalSlides = amounts.size();
         this.amounts = amounts;
         this.title = title;
         this.notes = notes;
         this.hidden = hidden;
-        this.stream = stream;
         this.timings = timings;
         this.ip = ip;
         this.software = software;
@@ -68,18 +66,15 @@ public class Data {
     public static String encode(Data data){
         JSONObject json = new JSONObject();
         JSONArray notes = new JSONArray();
-        JSONArray stream = new JSONArray();
         JSONArray hidden = new JSONArray();
         JSONArray timings = new JSONArray();
         JSONArray amounts = new JSONArray();
         notes.addAll(data.notes);
-        stream.addAll(data.stream);
         timings.addAll(data.timings);
         amounts.addAll(data.amounts);
         hidden.addAll(data.hidden);
         json.put("title", data.title);
         json.put("notes", notes);
-        json.put("stream", stream);
         json.put("hidden", hidden);
         json.put("timings", timings);
         json.put("amounts", amounts);
@@ -106,11 +101,10 @@ public class Data {
         Long longSoftware = (Long) jsonObject.get("software");
         int software = Integer.parseInt(longSoftware.toString());
         ArrayList<String> notes = (ArrayList<String>) jsonObject.get("notes");
-        ArrayList<Boolean> stream = (ArrayList<Boolean>) jsonObject.get("stream");
         ArrayList<Boolean> hidden = (ArrayList<Boolean>) jsonObject.get("hidden");
         ArrayList<Long> timings = (ArrayList<Long>) jsonObject.get("timings");
         ArrayList<Long> amounts = (ArrayList<Long>) jsonObject.get("amounts");
-        return new Data(title, ip, software, notes, amounts, hidden, stream, timings);
+        return new Data(title, ip, software, notes, amounts, hidden, timings);
 
     }
 
