@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.text.*?>
-<?import java.lang.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.effect.*?>
@@ -16,7 +15,7 @@
          <children>
             <ImageView fitHeight="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../assets/logo.png" />
+                  <Image url="@../assets/icon_bg_113.png" />
                </image>
                <HBox.margin>
                   <Insets left="10.0" top="8.0" />
@@ -36,17 +35,6 @@
                         </TextField>
                      </children>
                   </HBox>
-                  <ImageView id="ignitionLogoView" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../assets/ignition.png" />
-                     </image>
-                     <HBox.margin>
-                        <Insets bottom="17.0" right="10.0" />
-                     </HBox.margin>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </ImageView>
                </children>
             </HBox>
          </children>

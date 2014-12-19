@@ -11,7 +11,7 @@
 
 <VBox maxHeight="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox id="bar" alignment="CENTER" maxHeight="40.0" minHeight="40.0" style="-fx-background-color: #4e4e4e;" VBox.vgrow="NEVER">
+      <HBox id="bar" alignment="CENTER" maxWidth="900.0" maxHeight="40.0" minHeight="40.0" style="-fx-background-color: #4e4e4e;" VBox.vgrow="NEVER">
          <children>
             <Text id="title" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" HBox.hgrow="ALWAYS">
                <HBox.margin>
