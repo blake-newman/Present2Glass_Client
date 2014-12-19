@@ -1,11 +1,11 @@
 package present2glass.controllers.presenters.windows;
 
 import org.jnativehook.keyboard.NativeKeyEvent;
-import present2glass.controllers.Presenter;
+import present2glass.controllers.presenters.Primary;
 
 import java.awt.event.KeyEvent;
 
-public class LibreOffice extends Presenter{
+public class LibreOffice extends Primary {
 
     @Override
     public Boolean isNext(int code) {

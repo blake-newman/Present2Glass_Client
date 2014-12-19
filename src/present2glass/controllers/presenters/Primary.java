@@ -1,12 +1,14 @@
-package present2glass.controllers;
+package present2glass.controllers.presenters;
 
 import org.jnativehook.keyboard.NativeKeyEvent;
 import present2glass.Main;
+import present2glass.controllers.Data;
+import present2glass.controllers.EventListener;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
-public class Presenter implements present2glass.interfaces.Presenter {
+public class Primary implements present2glass.interfaces.Presenter {
 
 
     public Boolean isPresenting = false;
@@ -17,7 +19,7 @@ public class Presenter implements present2glass.interfaces.Presenter {
     protected String goToValue = "";
     protected Robot robot;
 
-    public Presenter(){
+    public Primary(){
         try {
             robot = new Robot();
         } catch (AWTException e){
@@ -382,22 +384,22 @@ public class Presenter implements present2glass.interfaces.Presenter {
 
     public void sendData(String note, Long time){
         if(!isPresenting) return;
-        Main.viewer.set(note, time);
-        Main.server.outNote = note;
-        Main.server.outTime = time;
+        present2glass.Main.viewer.set(note, time);
+        present2glass.Main.server.outNote = note;
+        present2glass.Main.server.outTime = time;
     }
 
     public void stopPresentation(){
-        Main.toggleViewer(false);
+        present2glass.Main.toggleViewer(false);
         isPresenting = false;
-        Main.server.stopPresentation();
+        present2glass.Main.server.stopPresentation();
     }
 
     public void startPresentation(){
         isPresenting = true;
         data = new Data();
-        Main.toggleViewer(true);
-        Main.server.startPresentation();
+        present2glass.Main.toggleViewer(true);
+        present2glass.Main.server.startPresentation();
         try {
             Thread.sleep(500);
         } catch (InterruptedException e) {

@@ -69,15 +69,6 @@
                   </TextArea>
                   <VBox spacing="10.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <CheckBox id="streamBox" mnemonicParsing="false" text="Stream video" VBox.vgrow="NEVER">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <VBox.margin>
-                              <Insets top="5.0" />
-                           </VBox.margin>
-                        </CheckBox>
-                        <Separator maxWidth="250.0" prefWidth="190.0" />
                         <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="10.0">
                            <children>
                               <Text id="title" strokeType="OUTSIDE" strokeWidth="0.0" text="Display time:" />

@@ -52,10 +52,12 @@ public class Server{
 
     public void startPresentation() {
         outStart = true;
+        outStop = false;
     }
 
     public void stopPresentation() {
-        outStop = false;
+        outStop = true;
+        outStart = false;
     }
 
     public void destroy(){
@@ -69,27 +71,36 @@ public class Server{
         }
     }
 
+    private DataInputStream createIn(Socket socket) throws IOException {
+        return new DataInputStream(socket.getInputStream());
+    }
+
+    private DataOutputStream createOut(Socket socket) throws IOException {
+        return new DataOutputStream(socket.getOutputStream());
+    }
+
     private class Connection extends Thread{
         public Socket socket;
         public DataOutputStream out;
         public DataInputStream in;
 
-        @SuppressWarnings("InfiniteRecursion")
         public void run(){
             try {
                 socket = serverSocket.accept();
                 socket.setReuseAddress(true);
+                DataInputStream in = createIn(socket);
+                DataOutputStream out = createOut(socket);
                 connected = true;
                 timeout = 0;
                 int code = in.readInt();
                 switch(code) {
                     case (0):
                         if (outStart) {
-                            out.writeInt(1);
                             outStart = false;
+                            out.writeInt(1);
                         } else if (outStop) {
-                            out.writeInt(2);
                             outStop = false;
+                            out.writeInt(2);
                             outNote = null;
                             outTime = Long.parseLong("-1");
                         } else if (outNote != null && outTime != Long.parseLong("-1")){
@@ -101,6 +112,7 @@ public class Server{
                         }  else {
                             out.writeInt(999);
                         }
+                        break;
                     case (1):
                         Main.presenter.simulateStart();
                         break;

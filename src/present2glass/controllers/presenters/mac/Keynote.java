@@ -2,11 +2,11 @@ package present2glass.controllers.presenters.mac;
 
 
 import org.jnativehook.keyboard.NativeKeyEvent;
-import present2glass.controllers.Presenter;
+import present2glass.controllers.presenters.Primary;
 
 import java.awt.event.KeyEvent;
 
-public class Keynote extends Presenter{
+public class Keynote extends Primary {
 
     @Override
     public Boolean isNext(int code) {

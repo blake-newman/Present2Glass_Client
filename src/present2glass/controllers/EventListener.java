@@ -49,11 +49,12 @@ public class EventListener implements NativeMouseListener, NativeKeyListener{
     }
 
     public static void stop(){
-        try {
+        /* try {
             GlobalScreen.registerNativeHook();
         } catch (NativeHookException e) {
             e.printStackTrace();
         }
+        */
     }
 
     @Override

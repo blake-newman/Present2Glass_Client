@@ -46,7 +46,7 @@ public class Item {
         input = (TextArea) wrapper.getChildren().get(0);
         VBox options = (VBox) wrapper.getChildren().get(1);
 
-        displayTimeHBox = (HBox) options.getChildren().get(2);
+        displayTimeHBox = (HBox) options.getChildren().get(0);
         displayTimeInput = (TextField) displayTimeHBox.getChildren().get(1);
 
         displayTimeInput.lengthProperty().addListener(new ChangeListener<Number>(){

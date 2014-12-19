@@ -2,12 +2,11 @@ package present2glass.controllers.presenters.windows;
 
 
 import org.jnativehook.keyboard.NativeKeyEvent;
-import present2glass.controllers.EventListener;
-import present2glass.controllers.Presenter;
+import present2glass.controllers.presenters.Primary;
 
 import java.awt.event.KeyEvent;
 
-public class PowerPoint extends Presenter{
+public class PowerPoint extends Primary {
 
     @Override
     public Boolean isNext(int code) {

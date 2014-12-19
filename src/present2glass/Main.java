@@ -8,8 +8,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -21,6 +19,7 @@ import present2glass.components.Splash;
 import present2glass.components.Viewer;
 import present2glass.controllers.*;
 
+import present2glass.controllers.presenters.Primary;
 import present2glass.fonts.Roboto;
 
 import java.util.Timer;
@@ -34,7 +33,7 @@ public class Main extends Application {
     static public Stage stage;
     static public Scene scene;
     static public Nav nav;
-    static public Presenter presenter;
+    static public Primary presenter;
     static public Viewer viewer;
     static public Server server;
     static public Glass glass;
