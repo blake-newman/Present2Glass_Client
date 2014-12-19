@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="0.0" maxWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox id="bar" maxHeight="40.0" minHeight="40.0" style="-fx-background-color: bbbbbb;" VBox.vgrow="NEVER">
          <children>
@@ -44,6 +44,9 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <HBox.margin>
+                        <Insets right="6.0" />
+                     </HBox.margin>
                   </ImageView>
                </children>
             </HBox>
@@ -55,7 +58,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </HBox>
-      <ScrollPane id="content" hbarPolicy="NEVER" minHeight="0.0" prefViewportHeight="208.0" prefViewportWidth="910.0" vbarPolicy="NEVER">
+      <ScrollPane id="content" hbarPolicy="NEVER" minHeight="0.0" prefViewportHeight="208.0" prefViewportWidth="900.0" vbarPolicy="NEVER">
          <content>
             <HBox id="wrapper" fillHeight="false" spacing="20.0">
                <children>
